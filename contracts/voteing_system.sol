@@ -3,11 +3,15 @@ pragma solidity >=0.6.0 < 0.9.0;
 contract voteing_system {
     address[] public voter_list;
     address public owner = msg.sender;
-
     struct Candidate {
       string name;
       uint ballot;
    }
+   constructor() {
+        register("Imam Sudarshan");
+        register("Samuil Markos");
+        register("Ami Sergejs");
+    }
 
    Candidate[] public candidate_list;
    
@@ -41,6 +45,7 @@ contract voteing_system {
            }
        }
        return winner;
+
 
    }
 

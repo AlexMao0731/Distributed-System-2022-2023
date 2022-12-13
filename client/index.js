@@ -12,42 +12,34 @@ const createElementFromString = (string) => {
   el.innerHTML = string;
   return el.firstChild;
 };
+const test = configuration.networks;
 
-// const CONTRACT_ADDRESS =
-//   configuration.networks['5777'].address;
+// const CONTRACT_ADDRESS = configuration.networks['5777'].address;
+const CONTRACT_ADDRESS = "0xc0c4aaBf7D42c81ab8Dc4ae9D801c08494F06566";
+const CONTRACT_ABI = configuration.abi;
+// console.log(test);
 
 const web3 = new Web3(
   Web3.givenProvider || 'http://127.0.0.1:7545'
 );
-
-const CONTRACT_ADDRESS = web3.eth.requestAccounts()[0];
-const CONTRACT_ABI = configuration.abi;
-
 const contract = new web3.eth.Contract(
   CONTRACT_ABI,
   CONTRACT_ADDRESS
 );
 
+
 let account;
 
 const accountEl = document.getElementById('account');
-// const ticketsEl = document.getElementById('tickets');
 const candidatesEl = document.getElementById('tickets');
-
-//In deno init by hard code 
-// contract.methods.register("Imam Sudarshan").send();
-// contract.methods.register("Samuil Markos").send();
-// contract.methods.register("Ami Sergejs").sned();
+// var button = document.getElementById("button");
 
 const Voting = async (num) => {
-  await contract.methods
-    .vote(num);
+  await contract.methods.vote(num).send({from: account});
 };
 
 const all_candidates = async () => {
   candidatesEl.innerHTML = ''; 
-  // const ticket = await contract.methods.tickets(0).call();
-  const ticket = []
   const candidates1 = createElementFromString(
     `<div class="ticket card" style="width: 18rem;">
       <img src="${cowboy1}" class="card-img-top" alt="...">
@@ -60,8 +52,8 @@ const all_candidates = async () => {
       </div>
     </div>`
   );
-  candidates1.onclick = Voting.bind(null, 1);
-  // candidates1.onclick = contract.methods.vote(1).send();
+  candidates1.onclick = Voting.bind(null, 0);
+
   candidatesEl.appendChild(candidates1);
   const candidates2 = createElementFromString(
     `<div class="ticket card" style="width: 18rem;">
@@ -75,7 +67,7 @@ const all_candidates = async () => {
       </div>
     </div>`
   );
-  candidates2.onclick = Voting.bind(null, 2);
+  candidates2.onclick = Voting.bind(null, 1);
   candidatesEl.appendChild(candidates2);
   const candidates3 = createElementFromString(
     `<div class="ticket card" style="width: 18rem;">
@@ -89,15 +81,29 @@ const all_candidates = async () => {
       </div>
     </div>`
   );
-  candidates3.onclick = Voting.bind(null, 3);
+  candidates3.onclick = Voting.bind(null, 2);
   candidatesEl.appendChild(candidates3);
 };
+
+// const Show_result = async () => {
+//   const winner = await contract.methods.show().call();
+//   alert("Winner is " + winner);
+
+// };
+// let btn = document.createElement("button");
+// btn.innerHTML = "Save";
+// btn.onclick = function () {
+//   alert("Button is clicked");
+// };
+// document.body.appendChild(btn);
+
 
 const main = async () => {
   const accounts = await web3.eth.requestAccounts();
   account = accounts[0];
   accountEl.innerText = account;
   await all_candidates();
+  
 };
 
 main();
