@@ -1,7 +1,7 @@
 pragma solidity >=0.6.0 < 0.9.0;
 
 contract voteing_system {
-    address[] voter_list;
+    address[] public voter_list;
     address public owner = msg.sender;
     struct Candidate {
       string name;
@@ -13,7 +13,7 @@ contract voteing_system {
         register("Ami Sergejs");
     }
 
-   Candidate[] candidate_list;
+   Candidate[] public candidate_list;
    
 
    function register(string memory _name) public {
@@ -44,8 +44,10 @@ contract voteing_system {
                max = candidate_list[i].ballot;
                winner = i;
            }
+           candidate_list[i].ballot = 0;
        }
        delete voter_list;
+
        return winner;
 
     

@@ -1,5 +1,4 @@
 import Web3 from 'web3';
-// import configuration from '../build/contracts/Tickets.json';
 import configuration from '../build/contracts/voteing_system.json';
 import 'bootstrap/dist/css/bootstrap.css';
 import cowboy1 from './images/cowboy1.png';
@@ -12,12 +11,11 @@ const createElementFromString = (string) => {
   el.innerHTML = string;
   return el.firstChild;
 };
-const test = configuration.networks;
 
-// const CONTRACT_ADDRESS = configuration.networks['5777'].address;
-const CONTRACT_ADDRESS = "0xce5d7edbaaa0e823374d4F65697962F16bE4165b";
+
+const CONTRACT_ADDRESS = configuration.networks[5777].address;
 const CONTRACT_ABI = configuration.abi;
-// console.log(test);
+
 
 const web3 = new Web3(
   Web3.givenProvider || 'http://127.0.0.1:7545'
@@ -32,7 +30,7 @@ let account;
 
 const accountEl = document.getElementById('account');
 const candidatesEl = document.getElementById('tickets');
-// var button = document.getElementById("button");
+
 
 const Voting = async (num) => {
   await contract.methods.vote(num).send({from: account});
@@ -89,6 +87,7 @@ const all_candidates = async () => {
 let btn = document.getElementById("result_button");
 btn.onclick = async () => {
     const winner = await contract.methods.show().call();
+    
     if (winner == 0) {
       alert("Nobody vote");
     }
