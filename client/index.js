@@ -15,7 +15,7 @@ const createElementFromString = (string) => {
 const test = configuration.networks;
 
 // const CONTRACT_ADDRESS = configuration.networks['5777'].address;
-const CONTRACT_ADDRESS = "0xc0c4aaBf7D42c81ab8Dc4ae9D801c08494F06566";
+const CONTRACT_ADDRESS = "0xce5d7edbaaa0e823374d4F65697962F16bE4165b";
 const CONTRACT_ABI = configuration.abi;
 // console.log(test);
 
@@ -85,17 +85,19 @@ const all_candidates = async () => {
   candidatesEl.appendChild(candidates3);
 };
 
-// const Show_result = async () => {
-//   const winner = await contract.methods.show().call();
-//   alert("Winner is " + winner);
 
-// };
-// let btn = document.createElement("button");
-// btn.innerHTML = "Save";
-// btn.onclick = function () {
-//   alert("Button is clicked");
-// };
-// document.body.appendChild(btn);
+let btn = document.getElementById("result_button");
+btn.onclick = async () => {
+    const winner = await contract.methods.show().call();
+    if (winner == 0) {
+      alert("Nobody vote");
+    }
+    else{
+      alert("Winner is " + winner);
+    }
+    
+};
+
 
 
 const main = async () => {

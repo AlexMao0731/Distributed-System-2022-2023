@@ -1,19 +1,19 @@
 pragma solidity >=0.6.0 < 0.9.0;
 
 contract voteing_system {
-    address[] public voter_list;
+    address[] voter_list;
     address public owner = msg.sender;
     struct Candidate {
       string name;
       uint ballot;
    }
-   constructor() {
+   constructor()  {
         register("Imam Sudarshan");
         register("Samuil Markos");
         register("Ami Sergejs");
     }
 
-   Candidate[] public candidate_list;
+   Candidate[] candidate_list;
    
 
    function register(string memory _name) public {
@@ -35,7 +35,8 @@ contract voteing_system {
        return false;
    }
 
-   function show() public view returns(uint){
+   function show() external payable returns(uint){
+       require(owner == msg.sender);
        uint max = 0;
        uint winner = 0;
        for(uint i = 0; i < candidate_list.length; ++i) {
@@ -44,8 +45,10 @@ contract voteing_system {
                winner = i;
            }
        }
+       delete voter_list;
        return winner;
 
+    
 
    }
 
