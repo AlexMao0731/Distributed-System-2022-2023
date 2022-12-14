@@ -86,9 +86,10 @@ const all_candidates = async () => {
 
 let btn = document.getElementById("result_button");
 btn.onclick = async () => {
-    const winner = await contract.methods.show().call();
-    
-    if (winner == 0) {
+    await contract.methods.show().send({from: account});
+    var winner = await contract.methods.get_winner().call();
+    console.log(winner);
+    if (winner == -1) {
       alert("Nobody vote");
     }
     else{
