@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import configuration from '../build/contracts/voteing_system.json';
+import configuration from '../build/contracts/voting_system.json';
 import 'bootstrap/dist/css/bootstrap.css';
 import cowboy1 from './images/cowboy1.png';
 import cowboy2 from './images/cowboy2.png';
@@ -13,7 +13,7 @@ const createElementFromString = (string) => {
 };
 
 
-const CONTRACT_ADDRESS = configuration.networks[5777].address;
+const CONTRACT_ADDRESS = configuration.networks['5777'].address;
 const CONTRACT_ABI = configuration.abi;
 
 

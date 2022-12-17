@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel land.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.8.0"
+    "parcel": "^2.8.2"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
