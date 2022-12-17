@@ -1,6 +1,7 @@
 import Web3 from 'web3';
 import configuration from '../build/contracts/voting_system.json';
 import 'bootstrap/dist/css/bootstrap.css';
+import indexPage from './index.html'
 
 const createElementFromString = (string) => {
     const el = document.createElement('div');
@@ -27,7 +28,7 @@ const registerEl = document.getElementById('register');
 const registerVoterElement = async () => {
     registerEl.innerHTML = ''; 
     const registerElement = createElementFromString(
-      `<form name="register" method="post" >  
+      `<form name="register" method="POST" action="./">  
       Voter Name: <input type="text" name="name"><br/>
       <input type="submit" value="register">  
       </form> `
@@ -35,12 +36,7 @@ const registerVoterElement = async () => {
     registerElement.onclick = voterRegistration.bind(null);
   
     registerEl.appendChild(registerElement);
-        }
-
-
-const Register = async (name) => {
-    await contract.methods.voter_registration(name).send({from: account});
-  };
+}
 
 
 const voterRegistration = async () => {
@@ -50,12 +46,10 @@ const voterRegistration = async () => {
       alert("Name can't be blank");  
       return false;  
     }
-  await Register(name);
+  await contract.methods.voter_registration(name).send({from: account});
+  window.location.reload();
 }
 
-  const validateForm = async () => {   
-    
-  };
 
   const main = async () => {
     const accounts = await web3.eth.requestAccounts();

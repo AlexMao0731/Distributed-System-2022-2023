@@ -30,7 +30,6 @@ contract voting_system {
     }
 
     function voter_registration(string memory _name) public {
-        require(check(msg.sender) == true);
         voter_roll.push(
             Voter({name: _name, voted: false, voter_address: msg.sender})
         );
