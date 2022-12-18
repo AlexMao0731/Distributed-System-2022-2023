@@ -78,9 +78,11 @@ contract voting_system {
             candidate_list[i].ballot = 0;
         }
         delete voter_list;
+        max = 0;
     }
 
     function get_winner() external view returns (int256) {
         require(owner == msg.sender);
+        return winner;
 }
 }
