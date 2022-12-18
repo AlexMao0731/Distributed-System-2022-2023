@@ -2,7 +2,8 @@
   "name": "client",
   "version": "1.0.0",
   "scripts": {
-    "start": "parcel land.html"
+    "start": "parcel land.html",
+    "build": "parcel build index.html --public-url ./"
   },
   "keywords": [],
   "author": "",
